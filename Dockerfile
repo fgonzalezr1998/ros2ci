@@ -22,6 +22,7 @@ ENV ROS_DISTRO=$ROS_DISTRO
 RUN apt-get -qq update && \
     apt-get -qq upgrade -y && \
     if [ -e /opt/ros/$ROS_DISTRO/setup.bash ]; then true; else apt-get -qq install ros-$ROS_DISTRO-ros-workspace -y; fi && \
+    apt-get -qq install readline-common libreadline-dev libreadline7 -y && \
     rm -rf /var/lib/apt/lists/*
 
 ARG REPO_SLUG=repo/to/test
