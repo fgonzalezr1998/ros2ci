@@ -34,7 +34,19 @@ function test_workspace() {
 colcon test \
     --executor sequential \
     --event-handlers console_direct+
-# use colcon test-result to get list of failures and return error code accordingly
+    '''
+    /opt/ros/$ROS_DISTRO/bin/ament_cppcheck --language=c++ \
+    --xunit-file ./build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml \
+    --include_dirs ./src/MOCAP4ROS2/vicon2/mocap_camera_composer/include
+
+    /usr/bin/python3 "-u" "/opt/ros/dashing/share/ament_cmake_test/cmake/run_test.py" \
+    "/home/david/ros2/mocap_ws/build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml" \
+    "--package-name" "mocap_camera_composer" "--output-file" \
+    "/home/david/ros2/mocap_ws/build/mocap_camera_composer/ament_cppcheck/cppcheck.txt" \
+    "--command" "/opt/ros/dashing/bin/ament_cppcheck" "--xunit-file" \
+    "/home/david/ros2/mocap_ws/build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml" \
+    "--include_dirs" "/home/david/git/MOCAP4ROS2/vicon2/mocap_camera_composer/include"
+    '''
 colcon test-result
 }
 
@@ -44,4 +56,4 @@ install_dependencies
 source /opt/ros/$ROS_DISTRO/setup.bash
 
 build_workspace
-# test_workspace
+test_workspace
