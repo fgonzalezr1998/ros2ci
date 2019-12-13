@@ -30,11 +30,11 @@ colcon build \
 }
 
 function test_workspace() {
-
+'''
 colcon test \
     --executor sequential \
     --event-handlers console_direct+
-    '''
+
     /opt/ros/$ROS_DISTRO/bin/ament_cppcheck --language=c++ \
     --xunit-file ./build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml \
     --include_dirs ./src/MOCAP4ROS2/vicon2/mocap_camera_composer/include
@@ -47,6 +47,13 @@ colcon test \
     "/home/david/ros2/mocap_ws/build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml" \
     "--include_dirs" "/home/david/git/MOCAP4ROS2/vicon2/mocap_camera_composer/include"
     '''
+    /usr/bin/python3 "-u" "/opt/ros/dashing/share/ament_cmake_test/cmake/run_test.py" \
+    "/opt/ros2_overlay_ws/build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml" \
+    "--package-name" "mocap_camera_composer" "--output-file" "/opt/ros2_overlay_ws/build/mocap_camera_composer/ament_cppcheck/cppcheck.txt" \
+    "--command" "/opt/ros/dashing/bin/ament_cppcheck" "--xunit-file" \
+    "/opt/ros2_overlay_ws/build/mocap_camera_composer/test_results/mocap_camera_composer/cppcheck.xunit.xml" \
+    "--include_dirs" "/opt/ros2_overlay_ws/src/IntelligentRoboticsLabs/MOCAP4ROS2/vicon2/mocap_camera_composer/include" \
+    "--language" "c++"
 colcon test-result
 }
 
