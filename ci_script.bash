@@ -16,6 +16,9 @@
 set -e
 
 function install_dependencies() {
+cd src
+git clone https://github.com/IntelligentRoboticsLabs/ros2_planning_system.git
+cd ..
 # install dependencies
 apt-get -qq update && rosdep update && rosdep install -y \
   --from-paths src \
