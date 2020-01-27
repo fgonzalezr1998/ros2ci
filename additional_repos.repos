@@ -1,4 +1,12 @@
 repositories:
+  BehaviorTree.CPP:
+    type: git
+    url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
+    version: master
+  roslib:
+    type: git
+    url: https://github.com/ros/ros.git
+    version: 1.14.7
   BICA:
     type: git
     url: https://github.com/IntelligentRoboticsLabs/BICA.git
