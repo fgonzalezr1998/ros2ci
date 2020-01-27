@@ -1,8 +1,4 @@
 repositories:
-  BehaviorTree.CPP:
-    type: git
-    url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
-    version: master
   BICA:
     type: git
     url: https://github.com/IntelligentRoboticsLabs/BICA.git
@@ -11,7 +7,3 @@ repositories:
     type: git
     url: https://github.com/MROS-RobMoSys-ITP/navigation2.git
     version: pilot-urjc
-  ros2_planning_system:
-    type: git
-    url: https://github.com/IntelligentRoboticsLabs/ros2_planning_system.git
-    version: master
