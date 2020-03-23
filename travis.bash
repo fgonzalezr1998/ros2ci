@@ -20,7 +20,7 @@ elif [[ "$1" == "nightly" ]]; then
   export base_image="osrf/ros2:nightly";
   export ros_distro="foxy"
 else
-  export base_image="osrf/ros2:devel";
+  export base_image="osrf/ros2:nightly";
   export ros_distro="$1"
 fi
 
