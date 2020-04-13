@@ -28,7 +28,7 @@ RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/
 RUN apt install -y software-properties-common
 RUN add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install cuda cuda-10-1 cuda-compiler-10-1 cuda-nvcc-10-1 cuda-cudart-10-1 cuda-cudart-dev-10-1 cuda-curand-10-1 cuda-curand-dev-10-1 cuda-libraries-dev-10-1 cuda-toolkit-10-1
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install cuda-nvcc-10-1
 
 # install building tools
 RUN apt-get -qq update && \
