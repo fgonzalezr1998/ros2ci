@@ -19,6 +19,7 @@ function install_dependencies() {
 # install dependencies
 apt-get -qq update && rosdep update && rosdep install -y \
   --from-paths src \
+  --skip-keys darknet \
   --ignore-src \
   --rosdistro $ROS_DISTRO
 }
@@ -42,6 +43,11 @@ install_dependencies
 
 # source ROS_DISTRO in case newly installed packages modified environment
 source /opt/ros/$ROS_DISTRO/setup.bash
+
+export PATH=${PATH}:/usr/local/cuda-10.1/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.1/lib64
+
+nvcc --version
 
 build_workspace
 test_workspace

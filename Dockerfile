@@ -12,18 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG FROM_IMAGE=osrf/ros2:devel-bionic
+ARG FROM_IMAGE=nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
 FROM $FROM_IMAGE
 
 ARG ROS_DISTRO=foxy
 ENV ROS_DISTRO=$ROS_DISTRO
+
+RUN apt-get -qq update && \
+    apt-get -qq  install curl gnupg2 lsb-release wget && \
+    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+RUN mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+RUN apt install -y software-properties-common
+RUN add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install cuda cuda-10-1 cuda-compiler-10-1 cuda-nvcc-10-1 cuda-cudart-10-1 cuda-cudart-dev-10-1 cuda-curand-10-1 cuda-curand-dev-10-1 cuda-libraries-dev-10-1 cuda-toolkit-10-1
 
 # install building tools
 RUN apt-get -qq update && \
     apt-get -qq upgrade -y && \
     dpkg -l | grep ros&& \
     if [ -e /opt/ros/$ROS_DISTRO/setup.bash ]; then true; else apt-get -qq install ros-$ROS_DISTRO-ros-workspace -y; fi && \
-    apt-get -qq install readline-common libreadline-dev -y && \
+    apt-get -qq install ros-eloquent-ros-base readline-common libreadline-dev -y && \
     rm -rf /var/lib/apt/lists/*
 
 ARG REPO_SLUG=repo/to/test
@@ -40,7 +52,7 @@ RUN if [ -f additional_repos.repos ]; then vcs import src < additional_repos.rep
 RUN apt-get -qq update && rosdep install -y \
     --from-paths src \
     --ignore-src \
-    --skip-keys "libopensplice69 rti-connext-dds-5.3.1" \
+    --skip-keys "libopensplice69 rti-connext-dds-5.3.1 darknet" \
     && rm -rf /var/lib/apt/lists/*
 RUN . /opt/ros/$ROS_DISTRO/setup.sh && colcon \
     build \

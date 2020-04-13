@@ -28,4 +28,4 @@ export distro="$1"
 
 docker build -f .ros2ci/Dockerfile -t ${TRAVIS_REPO_SLUG,,}:$distro --build-arg REPO_SLUG=${TRAVIS_REPO_SLUG} --build-arg FROM_IMAGE=$base_image --build-arg ROS_DISTRO=$ros_distro .
 
-docker run -v ${TRAVIS_BUILD_DIR}:/opt/ros2_overlay_ws/src/${TRAVIS_REPO_SLUG} ${TRAVIS_REPO_SLUG,,}:$distro /opt/ros2_overlay_ws/ci_script.bash
+docker run --gpus all -v ${TRAVIS_BUILD_DIR}:/opt/ros2_overlay_ws/src/${TRAVIS_REPO_SLUG} ${TRAVIS_REPO_SLUG,,}:$distro /opt/ros2_overlay_ws/ci_script.bash
