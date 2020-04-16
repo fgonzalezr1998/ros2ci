@@ -15,20 +15,21 @@
 ARG FROM_IMAGE=nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
 FROM $FROM_IMAGE
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 ARG ROS_DISTRO=foxy
 ENV ROS_DISTRO=$ROS_DISTRO
 
 RUN apt-get -qq update && \
-    apt-get -qq  install curl gnupg2 lsb-release wget && \
+    apt-get -qq  install curl gnupg2 lsb-release wget software-properties-common && \
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 RUN mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-RUN apt install -y software-properties-common
 RUN add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install cuda-nvcc-10-1
+RUN apt-get install -y cuda libcublas-dev libcublas10 
 
 # install building tools
 RUN apt-get -qq update && \

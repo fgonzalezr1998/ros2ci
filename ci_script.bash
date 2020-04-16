@@ -27,7 +27,7 @@ apt-get -qq update && rosdep update && rosdep install -y \
 function build_workspace() {
 colcon build \
     --symlink-install \
-    --cmake-args -DSECURITY=ON --no-warn-unused-cli
+    --cmake-args -DSECURITY=ON -DCUDA_TEST=ON --no-warn-unused-cli
 }
 
 function test_workspace() {
@@ -44,10 +44,16 @@ install_dependencies
 # source ROS_DISTRO in case newly installed packages modified environment
 source /opt/ros/$ROS_DISTRO/setup.bash
 
-export PATH=${PATH}:/usr/local/cuda-10.1/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.1/lib64
+export PATH=$PATH:/usr/local/cuda-10.2/bin:${HOME}/ros/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-10.2/lib64
 
 nvcc --version
+nvidia-smi 
 
 build_workspace
+
+sudo ldconfig
+
+source install/setup.bash
+
 test_workspace
