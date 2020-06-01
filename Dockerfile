@@ -26,6 +26,9 @@ RUN apt-get -qq update && \
     apt-get -qq install readline-common libreadline-dev -y && \
     rm -rf /var/lib/apt/lists/*
 
+COPY ./$CI_FOLDER/resources/ViconDataStreamSDK /usr/local/include
+COPY ./$CI_FOLDER/resources/libViconDataStreamSDK_CPP.so /usr/local/lib
+
 ARG REPO_SLUG=repo/to/test
 ARG CI_FOLDER=.ros2ci
 
