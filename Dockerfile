@@ -32,7 +32,7 @@ ARG REPO_SLUG=repo/to/test
 ARG CI_FOLDER=.ros2ci
 
 COPY ./$CI_FOLDER/resources/ViconDataStreamSDK/* /usr/local/include/ViconDataStreamSDK/
-COPY ./$CI_FOLDER/resources/libViconDataStreamSDK_CPP.so /usr/local/lib/
+COPY ./$CI_FOLDER/resources/libs/* /usr/local/lib/
 
 # setup underlay
 ENV ROS2_UNDERLAY_WS /opt/ros2_underlay_ws
