@@ -27,11 +27,12 @@ RUN apt-get -qq update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /usr/local/include/ViconDataStreamSDK
-COPY ./$CI_FOLDER/resources/ViconDataStreamSDK/* /usr/local/include/ViconDataStreamSDK
-COPY ./$CI_FOLDER/resources/libViconDataStreamSDK_CPP.so /usr/local/lib
 
 ARG REPO_SLUG=repo/to/test
 ARG CI_FOLDER=.ros2ci
+
+COPY ./$CI_FOLDER/resources/ViconDataStreamSDK/* /usr/local/include/ViconDataStreamSDK
+COPY ./$CI_FOLDER/resources/libViconDataStreamSDK_CPP.so /usr/local/lib
 
 # setup underlay
 ENV ROS2_UNDERLAY_WS /opt/ros2_underlay_ws
