@@ -30,8 +30,7 @@ RUN mkdir /usr/local/include/ViconDataStreamSDK
 
 ARG REPO_SLUG=repo/to/test
 ARG CI_FOLDER=.ros2ci
-ARG MSGS_FOLDER=.msgs
-
+#ARG MSGS_FOLDER=.msgs
 
 COPY ./$CI_FOLDER/resources/ViconDataStreamSDK/* /usr/local/include/ViconDataStreamSDK/
 COPY ./$CI_FOLDER/resources/libs/* /usr/local/lib/
@@ -59,8 +58,8 @@ ENV ROS_PACKAGE_PATH=$ROS2_UNDERLAY_WS/install/share:$ROS_PACKAGE_PATH
 # setup overlay
 ENV ROS2_OVERLAY_WS /opt/ros2_overlay_ws
 RUN mkdir -p $ROS2_OVERLAY_WS/src/$REPO_SLUG
+#COPY ./$MSGS_FOLDER/* $ROS2_OVERLAY_WS/src/
 COPY ./$CI_FOLDER/*.bash $ROS2_OVERLAY_WS/
-COPY ./$MSGS_FOLDER/* $ROS2_OVERLAY_WS/src/
 
 WORKDIR $ROS2_OVERLAY_WS
 
