@@ -61,6 +61,8 @@ RUN mkdir -p $ROS2_OVERLAY_WS/src/$REPO_SLUG
 COPY ./$MSGS_FOLDER/* $ROS2_OVERLAY_WS/src/
 COPY ./$CI_FOLDER/*.bash $ROS2_OVERLAY_WS/
 
+RUN ls $ROS2_OVERLAY_WS/src/mocap4ros_msgs/
+
 WORKDIR $ROS2_OVERLAY_WS
 
 # setup entrypoint
