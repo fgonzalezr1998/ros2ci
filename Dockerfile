@@ -23,7 +23,7 @@ RUN apt-get -qq update && \
     apt-get -qq upgrade -y && \
     dpkg -l | grep ros&& \
     if [ -e /opt/ros/$ROS_DISTRO/setup.bash ]; then true; else apt-get -qq install ros-$ROS_DISTRO-ros-workspace -y; fi && \
-    apt-get -qq install readline-common libreadline-dev ros-eloquent-tf2-msgs -y && \
+    apt-get -qq install readline-common libreadline-dev ros-eloquent-tf2-msgs* -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /usr/local/include/ViconDataStreamSDK
@@ -58,7 +58,8 @@ ENV ROS_PACKAGE_PATH=$ROS2_UNDERLAY_WS/install/share:$ROS_PACKAGE_PATH
 ENV ROS2_OVERLAY_WS /opt/ros2_overlay_ws
 RUN mkdir -p $ROS2_OVERLAY_WS/src/$REPO_SLUG
 COPY ./$CI_FOLDER/*.bash $ROS2_OVERLAY_WS/
-RUN source /opt/ros/$ROS_DISTRO/setup.bash
+
+RUN echo $ROS2_UNDERLAY_WS
 
 WORKDIR $ROS2_OVERLAY_WS
 
