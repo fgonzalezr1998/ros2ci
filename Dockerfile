@@ -23,7 +23,7 @@ RUN apt-get -qq update && \
     apt-get -qq upgrade -y && \
     dpkg -l | grep ros&& \
     if [ -e /opt/ros/$ROS_DISTRO/setup.bash ]; then true; else apt-get -qq install ros-$ROS_DISTRO-ros-workspace -y; fi && \
-    apt-get -qq install readline-common libreadline-dev -y && \
+    apt-get -qq install readline-common libreadline-dev ros-eloquent-tf2-msgs -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /usr/local/include/ViconDataStreamSDK
