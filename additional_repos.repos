@@ -3,3 +3,8 @@ repositories:
     type: git
     url: https://github.com/MOCAP4ROS2-Project/mocap4ros_msgs.git
     version: master
+
+  ros2/geometry2:
+    type: git
+    url: https://github.com/ros2/geometry2.git
+    version: eloquent
