@@ -26,6 +26,9 @@ RUN apt-get -qq update && \
     apt-get -qq install readline-common libreadline-dev -y && \
     rm -rf /var/lib/apt/lists/*
 
+## install X11 package
+RUN apt-get install libx11-dev
+
 ARG REPO_SLUG=repo/to/test
 ARG CI_FOLDER=.ros2ci
 
