@@ -39,7 +39,7 @@ ENV ROS2_UNDERLAY_WS /opt/ros2_underlay_ws
 COPY ./$CI_FOLDER/additional_repos.repos $ROS2_UNDERLAY_WS/
 RUN mkdir -p $ROS2_UNDERLAY_WS/src
 WORKDIR $ROS2_UNDERLAY_WS
-RUN if [ -f additional_repos.repos ]; then vcs import src < additional_repos.repos; fi
+RUN if [ -f additional_repos.repos ]; then vcs import --recursive src < additional_repos.repos; fi
 # build underlay
 RUN apt-get -qq update && rosdep install -y \
     --from-paths src \
