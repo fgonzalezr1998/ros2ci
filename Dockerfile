@@ -19,6 +19,7 @@ ARG ROS_DISTRO=eloquent
 ENV ROS_DISTRO=$ROS_DISTRO
 
 # X11
+RUN apt-get update && apt-get install libx11-dev
 ENV QT_X11_NO_MITSHM 1
 
 # install building tools
