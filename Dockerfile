@@ -15,7 +15,7 @@
 ARG FROM_IMAGE=osrf/ros2:devel-bionic
 FROM $FROM_IMAGE
 
-ARG ROS_DISTRO=foxy
+ARG ROS_DISTRO=eloquent
 ENV ROS_DISTRO=$ROS_DISTRO
 
 # install building tools
@@ -27,7 +27,7 @@ RUN apt-get -qq update && \
     rm -rf /var/lib/apt/lists/*
 
 ## install X11 package
-RUN apt-get install libx11-dev
+#RUN apt-get install libx11-dev
 
 ARG REPO_SLUG=repo/to/test
 ARG CI_FOLDER=.ros2ci
